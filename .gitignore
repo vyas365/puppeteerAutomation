@@ -1,3 +1,4 @@
 node_modules/
 *.log
 api/target
+jest_puppeteer_global_setup
