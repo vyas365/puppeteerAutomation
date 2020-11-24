@@ -8,7 +8,7 @@
 
 # Installation Steps
 
-1. git clone `https://github.com/vyas365/puppeteerAutomation.git`
+1.  git clone `https://github.com/vyas365/puppeteerAutomation.git`
 2. `cd puppeteerAutomation`
 3. `npm install`
 
