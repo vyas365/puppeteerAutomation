@@ -1,5 +1,5 @@
-Feature: Directory must allow user to sort Symbol and Name column.
-Sort must occur across the entire directory, not just the viewable page. 
+Feature: Allow users to sort Symbol and Name column.
+
  
 Background:
    * configure driver = { type: 'chrome' }

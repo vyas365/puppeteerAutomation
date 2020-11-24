@@ -1,12 +1,24 @@
 const timeout = 10000;
 
-const isElementVisible = async (page, cssSelector) => {
+const isElementVisible = async (page, element) => {
   let visible = true;
   await page
-    .waitForSelector(cssSelector, { visible: true, timeout: timeout })
+    .waitForSelector(element, { visible: true, timeout: timeout })
     .catch(() => {
       visible = false;
     });
+  return visible;
+};
+
+const areElementsVisible = async (page, elements) => {
+  let visible = true;
+  for (let element of elements) {
+    await page
+      .waitForSelector(element, { visible: true, timeout: timeout })
+      .catch(() => {
+        visible = false;
+      });
+  }
   return visible;
 };
 
@@ -20,6 +32,7 @@ const setup = async (page, url) => {
 
 module.exports = {
   isElementVisible,
+  areElementsVisible,
   setup,
   timeout,
 };

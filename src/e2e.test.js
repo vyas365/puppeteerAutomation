@@ -5,11 +5,18 @@ const {
   verifyAllRecords,
 } = require("./pages/directoryList.js");
 
-const { isElementVisible, timeout, setup } = require("./pages/utils.js");
+const {
+  isElementVisible,
+  areElementsVisible,
+  timeout,
+  setup,
+} = require("./pages/utils.js");
 
-const directorySelectors = require("./selectors/directoryList");
-const quoteSelectors = require("./selectors/quote");
-const pagerSelectors = require("./selectors/pager");
+const {
+  directorySelectors,
+  quoteSelectors,
+  pagerSelectors,
+} = require("./selectors");
 
 describe("Automation FE Exercise NYSE", () => {
   let page;
@@ -21,7 +28,7 @@ describe("Automation FE Exercise NYSE", () => {
     await page.waitFor(4000);
   }, timeout);
 
-  it("should display data sorted by Symbol in ascending", async () => {
+  it("Directory should display data sorted by Symbol in ascending", async () => {
     const isSymbolArraySorted = await verifySymbolListIsSorted(
       page,
       directorySelectors.symbolRow
@@ -54,36 +61,45 @@ describe("Automation FE Exercise NYSE", () => {
     expect(isPagerAvailable).toBe(true);
   });
 
-  
   it("Directory pager must allow user to navigate to next page, previous page, first page, and last page", async () => {
+    //On initial page load
+    const pagesDisabledOnInitialLoad = await areElementsVisible(
+      page,
+      pagerSelectors.initialLoadPageDisabled
+    );
+    expect(pagesDisabledOnInitialLoad).toBe(true);
+
     //navigate to next page
     await page.waitFor(pagerSelectors.next);
     await page.click(pagerSelectors.next);
-    const isPageDisabled = await isElementVisible(page, pagerSelectors.pageDisabled);
+    await page.waitFor(1000);
+    const isPageDisabled = await isElementVisible(
+      page,
+      pagerSelectors.verifyNextDisabled
+    );
     expect(isPageDisabled).toBe(true);
 
     //previous page
     await page.waitFor(pagerSelectors.previous);
     await page.click(pagerSelectors.previous);
-    expect(isPageDisabled).toBe(true);
+    expect(pagesDisabledOnInitialLoad).toBe(true);
 
     //first page
-
     await page.waitFor(pagerSelectors.previous);
     await page.click(pagerSelectors.next);
     await page.waitFor(3000);
     await page.click(pagerSelectors.first);
-    expect(isPageDisabled).toBe(true);
+    expect(pagesDisabledOnInitialLoad).toBe(true);
 
     //last page
     await page.waitFor(pagerSelectors.last);
     await page.waitFor(3000);
     await page.click(pagerSelectors.last);
-    const lastPageVerification = await isElementVisible(
+    const lastPageVerification = await areElementsVisible(
       page,
-      pagerSelectors.next
-    ); //next button should be disabled
-    expect(lastPageVerification).toBe(false);
+      pagerSelectors.lastPageDisabled
+    );
+    expect(lastPageVerification).toBe(true);
   });
 
   afterAll(async () => {
