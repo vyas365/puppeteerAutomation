@@ -1,5 +1,11 @@
 # Test Automation using Puppeteer + Karate 
 
+## Features
+* This project uses Jest with Puppeteer to run browser tests parallely. It incorporates Page Object Models(POM) using Javascript for coding UI tests
+  along with ES6 implementation.
+* BDD to compose tests using Karate an Open source Framework for API automation.
+* Hybrid tests comprising of UI and API test automation using Karate.
+
 # Installation Steps
 
 1. git clone `https://github.com/vyas365/puppeteerAutomation.git`
@@ -8,10 +14,10 @@
 
 # Getting Started
 
-1. To execute all e2e tests, simply run
+1. To execute all functional UI tests, simply run
    `jest`
 
-2. To execute all api tests using Karate, enter
+2. To execute all API tests, run
    `npm run test:api`
 
    
