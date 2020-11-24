@@ -1,4 +1,4 @@
-# Test Automation using Puppeteer + Karate 
+# Test Automation using Puppeteer, Jest and Karate 
 
 ## Features
 * This project uses Jest with Puppeteer to run browser tests parallely. It incorporates Page Object Models(POM) using Javascript for coding UI tests
