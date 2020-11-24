@@ -1,7 +1,7 @@
 {
-  "name": "Automation Exercise",
   "scripts": {
-    "test": "jest"
+    "test": "jest",
+    "test:api": "cd ./api && bash karate *"
   },
   "dependencies": {
     "jest": "^24.8.0",
